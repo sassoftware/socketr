@@ -1,0 +1,3 @@
+# Placeholder for possible future support
+CXX_STD = CXX17
+OBJECTS = socketr_windows.o

@@ -1,0 +1,14 @@
+^\.copilot$
+^\.git$
+^\.Rcheck$
+^\.gitinore$
+^CONTRIBUTING\.md$
+^ContributorAgreement\.txt$
+^SUPPORT\.md$
+^SECURITY\.md$
+^doc$
+^Meta$
+^src/.*\.(o|so|dll|dylib|a|lib)$
+^cran-comments\.md$
+DEP-LICENSES\.md
+^docs$

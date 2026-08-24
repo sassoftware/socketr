@@ -1,0 +1,78 @@
+---
+title: "Blocking Sockets in Two R Sessions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Blocking Sockets in Two R Sessions}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+Blocking calls wait until the peer performs the matching operation. This
+example uses two distinct R sessions on the same machine:
+
+- **Session 1** starts a server and blocks in `socket_accept()` and then
+  `socket_receive()`.
+- **Session 2** connects to the server and sends the message that releases
+  Session 1.
+
+Choose a free TCP port, such as `45678`, and run Session 1 first.
+
+## Session 1: blocking server
+
+Run this code in the first R session:
+
+```{r blocking-server, eval=FALSE}
+library(socketR)
+
+server <- socket_create("inet", "stream")
+client <- NULL
+on.exit({
+  if (!is.null(client) && socket_is_open(client)) socket_close(client)
+  if (socket_is_open(server)) socket_close(server)
+}, add = TRUE)
+
+socket_reuse_address(server, TRUE)
+socket_bind(server, "127.0.0.1", 45678L)
+socket_listen(server)
+cat("Waiting for Session 2...\n")
+
+# This call blocks until Session 2 connects.
+client <- socket_accept(server)
+cat("Session 2 connected; waiting for data...\n")
+
+# This call blocks until Session 2 sends bytes.
+# connection loop starts here; this call blocks until Session 2 sends the bytes.
+payload <- socket_receive(client, n = 1024L)
+cat("Received:", rawToChar(payload), "\n")
+socket_send(client, "ack from Session 1")
+
+socket_close(client)
+```
+
+## Session 2: blocking client
+
+After Session 1 prints that it is waiting, run this code in a second R
+session:
+
+```{r blocking-client, eval=FALSE}
+library(socketR)
+
+client <- socket_create("inet", "stream")
+on.exit(if (socket_is_open(client)) socket_close(client), add = TRUE)
+
+# This call blocks until Session 1 is listening and accepts the connection.
+socket_connect(client, "127.0.0.1", 45678L)
+
+# communication loop starts here; this call blocks until Session 1 receives the bytes.
+socket_send(client, "hello from Session 2")
+
+# This call blocks until Session 1 sends the acknowledgement.
+ack <- socket_receive(client, n = 1024L)
+cat("Received:", rawToChar(ack), "\n")
+```
+
+Both sockets are blocking by default. To switch either session to
+nonblocking behavior, call `socket_set_blocking(client, FALSE)` and use
+`socket_poll()` before receiving data. Always close handles explicitly in
+long-running sessions; the external-pointer finalizer is a last-resort
+cleanup mechanism.

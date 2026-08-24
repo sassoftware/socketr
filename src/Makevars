@@ -1,0 +1,3 @@
+CXX_STD = CXX17
+PKG_CPPFLAGS = -DR_NO_REMAP
+OBJECTS = posix/socketr.o
