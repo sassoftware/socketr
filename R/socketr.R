@@ -14,6 +14,17 @@ check_socket <- function(socket) {
   socket
 }
 
+utils::globalVariables(c(
+  "socketr_connection_read", "socketr_connection_write", "socketr_resolve",
+  "socketr_socket_accept", "socketr_socket_bind", "socketr_socket_close",
+  "socketr_socket_connect", "socketr_socket_connection", "socketr_socket_create",
+  "socketr_socket_fd", "socketr_socket_get_option", "socketr_socket_info",
+  "socketr_socket_is_open", "socketr_socket_listen", "socketr_socket_name",
+  "socketr_socket_poll", "socketr_socket_recv", "socketr_socket_recvfrom",
+  "socketr_socket_send", "socketr_socket_sendto", "socketr_socket_set_blocking",
+  "socketr_socket_set_option", "socketr_socket_shutdown"
+))
+
 socketr_call <- function(.NAME, ...) {
   if (.Platform$OS.type == "windows") {
     stop("socketR socket operations are not available on Windows", call. = FALSE)
@@ -155,7 +166,7 @@ events_to_mask <- function(events) {
 #' @param nonblocking Whether the socket starts in nonblocking mode.
 #' @param cloexec Whether to set close-on-exec.
 #' @return A socketR external-pointer handle.
-#' @examples
+#' @examplesIf .Platform$OS.type != "windows"
 #' s <- socket_create()
 #' socket_close(s)
 #' @export
@@ -187,7 +198,7 @@ socket_resolve <- function(address, domain = c("inet", "inet6"), port = 0L) {
 #' @name socket_lifecycle
 #' @param socket A socketR socket handle.
 #' @return Invisibly, `TRUE`.
-#' @examples
+#' @examplesIf .Platform$OS.type != "windows"
 #' s <- socket_create()
 #' socket_close(s)
 #' @export
@@ -240,7 +251,7 @@ socket_info <- function(socket) {
 #' @param socket A socketR socket handle.
 #' @param blocking Whether operations should block.
 #' @return Invisibly, the socket handle.
-#' @examples
+#' @examplesIf .Platform$OS.type != "windows"
 #' s <- socket_create()
 #' socket_set_blocking(s, FALSE)
 #' socket_close(s)
@@ -320,7 +331,7 @@ socket_connect <- function(socket, address, port = NULL) {
 #' @param cloexec Whether to set close-on-exec.
 #' @param prefer Address families to try, in order.
 #' @return A connected socketR handle.
-#' @examples
+#' @examplesIf .Platform$OS.type != "windows"
 #' if (interactive()) {
 #'   client <- socket_connect_auto("localhost", 80L)
 #'   socket_close(client)
@@ -379,7 +390,7 @@ socket_connect_auto <- function(address, port = NULL, type = c("stream", "dgram"
 #' @param cloexec Whether to set close-on-exec.
 #' @param prefer Address families to try, in order.
 #' @return A listening socketR handle.
-#' @examples
+#' @examplesIf .Platform$OS.type != "windows"
 #' listener <- socket_listen_auto(port = 0L, prefer = "inet")
 #' socket_local_name(listener)
 #' socket_close(listener)
@@ -439,7 +450,7 @@ socket_listen_auto <- function(address = NULL, port = NULL, backlog = 128L,
 #' @param object A raw vector or character scalar.
 #' @param flags Native `send()` flags.
 #' @return Number of bytes written, or `NA_integer_` if I/O would block.
-#' @examples
+#' @examplesIf .Platform$OS.type != "windows"
 #' if (interactive()) {
 #'   server <- socket_create()
 #'   client <- socket_create()
@@ -471,7 +482,7 @@ socket_write <- function(socket, object, flags = 0L) {
 #' underlying socket. The default `FALSE` preserves adapter-only close
 #' behavior.
 #' @return An R `connection` object.
-#' @examples
+#' @examplesIf .Platform$OS.type != "windows"
 #' s <- socket_create()
 #' con <- socket_connection(s)
 #' close(con)
@@ -566,7 +577,7 @@ socket_receive <- function(socket, n = 4096L, flags = 0L) {
 #' @param port Destination port; `NULL` for Unix sockets.
 #' @param flags Native `sendto()` flags.
 #' @return Number of bytes sent, or `NA_integer_` if I/O would block.
-#' @examples
+#' @examplesIf .Platform$OS.type != "windows"
 #' if (interactive()) {
 #'   receiver <- socket_create(type = "dgram")
 #'   sender <- socket_create(type = "dgram")
@@ -611,7 +622,7 @@ socket_shutdown <- function(socket, how = c("both", "read", "write")) {
 #' @name socket_inspection
 #' @param socket A socketR socket handle.
 #' @return Address metadata as a list.
-#' @examples
+#' @examplesIf .Platform$OS.type != "windows"
 #' s <- socket_create()
 #' socket_local_name(s)
 #' socket_close(s)
@@ -635,7 +646,7 @@ socket_peer_name <- function(socket) {
 #' @param events Requested `"read"`, `"write"`, or combined readiness.
 #' @param timeout_ms Timeout in milliseconds; use `-1` to wait indefinitely.
 #' @return A data frame with readiness flags and native revents values.
-#' @examples
+#' @examplesIf .Platform$OS.type != "windows"
 #' s <- socket_create()
 #' socket_poll(s, "read", timeout_ms = 0L)
 #' socket_close(s)
@@ -766,7 +777,7 @@ socket_set_options <- function(socket, options) {
 #' @param on Optional logical linger enable flag.
 #' @param seconds Linger duration in seconds.
 #' @return The option value when reading; invisibly, the socket when setting.
-#' @examples
+#' @examplesIf .Platform$OS.type != "windows"
 #' s <- socket_create()
 #' socket_reuse_address(s, TRUE)
 #' socket_reuse_address(s)

@@ -47,8 +47,10 @@ Uses R's connection dispatch, so this works with \code{\link[=socket_connection]
 other writable R connections.
 }
 \examples{
+\dontshow{if (.Platform$OS.type != "windows") withAutoprint(\{ # examplesIf}
 s <- socket_create()
 con <- socket_connection(s)
 close(con)
 socket_close(s)
+\dontshow{\}) # examplesIf}
 }

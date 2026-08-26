@@ -54,8 +54,10 @@ option is updated and the socket handle is returned invisibly. The
 \code{socket_linger()} helper uses \code{on} and \code{seconds} to configure \code{SO_LINGER}.
 }
 \examples{
+\dontshow{if (.Platform$OS.type != "windows") withAutoprint(\{ # examplesIf}
 s <- socket_create()
 socket_reuse_address(s, TRUE)
 socket_reuse_address(s)
 socket_close(s)
+\dontshow{\}) # examplesIf}
 }

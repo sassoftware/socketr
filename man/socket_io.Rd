@@ -46,6 +46,7 @@ This is a connection-style alias for \code{\link[=socket_receive]{socket_receive
 wait until at least one byte is available or the peer closes the connection.
 }
 \examples{
+\dontshow{if (.Platform$OS.type != "windows") withAutoprint(\{ # examplesIf}
 if (interactive()) {
   server <- socket_create()
   client <- socket_create()
@@ -57,4 +58,5 @@ if (interactive()) {
   socket_read(peer, 5L)
   socket_close(peer); socket_close(client); socket_close(server)
 }
+\dontshow{\}) # examplesIf}
 }

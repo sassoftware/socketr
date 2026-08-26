@@ -33,6 +33,8 @@ Test whether a socket handle is open.
 Shut down part of a full-duplex socket.
 }
 \examples{
+\dontshow{if (.Platform$OS.type != "windows") withAutoprint(\{ # examplesIf}
 s <- socket_create()
 socket_close(s)
+\dontshow{\}) # examplesIf}
 }

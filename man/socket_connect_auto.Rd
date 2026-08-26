@@ -42,8 +42,10 @@ paths are not resolved by this helper. Use \code{type = "dgram"} for UDP or the
 default \code{type = "stream"} for TCP.
 }
 \examples{
+\dontshow{if (.Platform$OS.type != "windows") withAutoprint(\{ # examplesIf}
 if (interactive()) {
   client <- socket_connect_auto("localhost", 80L)
   socket_close(client)
 }
+\dontshow{\}) # examplesIf}
 }

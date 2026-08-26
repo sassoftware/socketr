@@ -39,7 +39,9 @@ require an explicit filesystem path with \code{\link[=socket_create]{socket_crea
 \code{\link[=socket_bind]{socket_bind()}}.
 }
 \examples{
+\dontshow{if (.Platform$OS.type != "windows") withAutoprint(\{ # examplesIf}
 listener <- socket_listen_auto(port = 0L, prefer = "inet")
 socket_local_name(listener)
 socket_close(listener)
+\dontshow{\}) # examplesIf}
 }

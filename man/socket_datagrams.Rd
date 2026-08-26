@@ -32,6 +32,7 @@ A list with \code{data} and \code{address}, or \code{NULL} if I/O would block.
 Send bytes to a datagram destination.
 }
 \examples{
+\dontshow{if (.Platform$OS.type != "windows") withAutoprint(\{ # examplesIf}
 if (interactive()) {
   receiver <- socket_create(type = "dgram")
   sender <- socket_create(type = "dgram")
@@ -41,4 +42,5 @@ if (interactive()) {
   socket_receive_from(receiver)
   socket_close(sender); socket_close(receiver)
 }
+\dontshow{\}) # examplesIf}
 }

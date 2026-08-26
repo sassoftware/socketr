@@ -60,6 +60,10 @@ A socket handle, or \code{NULL} when no connection is pending.
 Create a POSIX socket.
 }
 \examples{
-s <- socket_create()
-socket_close(s)
+\dontshow{if (.Platform$OS.type != "windows") withAutoprint(\{ # examplesIf}
+if (.Platform$OS.type != "windows") {
+  s <- socket_create()
+  socket_close(s)
+}
+\dontshow{\}) # examplesIf}
 }

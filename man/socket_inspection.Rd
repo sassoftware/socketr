@@ -32,7 +32,9 @@ Address metadata as a list.
 Return the local socket name.
 }
 \examples{
+\dontshow{if (.Platform$OS.type != "windows") withAutoprint(\{ # examplesIf}
 s <- socket_create()
 socket_local_name(s)
 socket_close(s)
+\dontshow{\}) # examplesIf}
 }

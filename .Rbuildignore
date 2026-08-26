@@ -13,5 +13,5 @@
 DEP-LICENSES\.md
 ^docs$
 ^_pkgdown\.yml$
-^pkgdown$
+^pkgdown\.yml$
 ^\.github$

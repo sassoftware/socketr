@@ -32,10 +32,14 @@ Control socket blocking and readiness.
 Poll sockets for readiness.
 }
 \examples{
+\dontshow{if (.Platform$OS.type != "windows") withAutoprint(\{ # examplesIf}
 s <- socket_create()
 socket_set_blocking(s, FALSE)
 socket_close(s)
+\dontshow{\}) # examplesIf}
+\dontshow{if (.Platform$OS.type != "windows") withAutoprint(\{ # examplesIf}
 s <- socket_create()
 socket_poll(s, "read", timeout_ms = 0L)
 socket_close(s)
+\dontshow{\}) # examplesIf}
 }
