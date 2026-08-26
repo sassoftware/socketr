@@ -12,3 +12,6 @@
 ^cran-comments\.md$
 DEP-LICENSES\.md
 ^docs$
+^_pkgdown\.yml$
+^pkgdown$
+^\.github$

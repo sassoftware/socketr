@@ -1,0 +1,7 @@
+url: https://sassoftware.github.io/socketr/
+template: ~
+bootstrap: 5
+authors:
+  SAS:
+    href: https://www.sas.com
+    html: <img src='man/figures/SAS_logo.png' alt='SAS' width='72' />

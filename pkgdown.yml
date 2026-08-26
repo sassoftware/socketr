@@ -1,0 +1,4 @@
+name: pkgdown
+jobs:
+  pkgdown:
+    runs-on: ubuntu-latest
