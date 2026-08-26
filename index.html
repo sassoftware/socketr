@@ -79,18 +79,22 @@
 <div class="section level1">
 <div class="page-header"><h1 id="socketr">socketR<a class="anchor" aria-label="anchor" href="#socketr"></a>
 </h1></div>
+<!-- badges: start -->
+
 <p><code>socketR</code> lets you work with network sockets directly from R on Linux. It supports common TCP, UDP, and Unix-domain socket workflows, with both function-based and object-oriented APIs.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## CRAN and r-universe instructions will be added once properly published.</span></span>
+<code class="sourceCode R"><span><span class="co">## CRAN instructions will be added once published.</span></span>
+<span></span>
+<span><span class="co">## install release from r-universe</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'socketR'</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'https://sassoftware.r-universe.dev'</span>, <span class="st">'https://cloud.r-project.org'</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## dev version</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_git</span><span class="op">(</span><span class="st">"https://github.com/sassoftware/socketr"</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://sassoftware.github.io/socketr/">"socketR"</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"sassoftware/socketr"</span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="example-tcp-loopback">Example: TCP loopback<a class="anchor" aria-label="anchor" href="#example-tcp-loopback"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sassoftware.github.io/socketr/">socketR</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://sassoftware.github.io/socketr/">"socketR"</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">server</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/socket_setup.html">socket_create</a></span><span class="op">(</span><span class="st">"inet"</span>, <span class="st">"stream"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/socket_options.html">socket_reuse_address</a></span><span class="op">(</span><span class="va">server</span>, <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -180,7 +184,15 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://sassoftware.r-universe.dev" class="external-link"><img src="https://sassoftware.r-universe.dev/badges/:name" alt="r-universe status"></a></li>
+<li><a href="https://sassoftware.r-universe.dev" class="external-link"><img src="https://sassoftware.r-universe.dev/badges/:packages" alt="r-universe status"></a></li>
+<li><a href="https://sassoftware.r-universe.dev" class="external-link"><img src="https://sassoftware.r-universe.dev/socketr/badges/version" alt="r-universe status"></a></li>
+<li><a href="https://sassoftware.r-universe.dev" class="external-link"><img src="https://sassoftware.r-universe.dev/socketr/badges/checks" alt="r-universe status"></a></li>
+</ul>
+</div>
 
   </div>
 </div>
