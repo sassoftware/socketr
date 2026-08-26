@@ -1,6 +1,6 @@
 Package: socketR
 Title: POSIX Socket Programming for R
-Version: 1.0.1.9000
+Version: 1.0.2
 Authors@R: c(
     person("Eduardo", "Hellas", , "ehellas@gmail.com", role = c("aut", "cre")),
     person("SAS", email= "support@sas.com", role = c("cph", "fnd"))
