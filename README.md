@@ -10,6 +10,8 @@
 supports common TCP, UDP, and Unix-domain socket workflows, with both
 function-based and object-oriented APIs.
 
+Web documentation: https://sassoftware.github.io/r-sasctl/
+
 ```r
 ## CRAN instructions will be added once published.
 
