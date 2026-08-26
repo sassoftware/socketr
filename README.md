@@ -1,21 +1,29 @@
 # socketR
+<!-- badges: start -->
+[![r-universe status](https://sassoftware.r-universe.dev/badges/:name)](https://sassoftware.r-universe.dev)
+[![r-universe status](https://sassoftware.r-universe.dev/badges/:packages)](https://sassoftware.r-universe.dev)
+[![r-universe status](https://sassoftware.r-universe.dev/socketr/badges/version)](https://sassoftware.r-universe.dev)
+[![r-universe status](https://sassoftware.r-universe.dev/socketr/badges/checks)](https://sassoftware.r-universe.dev)
+<!-- badges: end -->
 
 `socketR` lets you work with network sockets directly from R on Linux. It
 supports common TCP, UDP, and Unix-domain socket workflows, with both
 function-based and object-oriented APIs.
 
 ```r
-## CRAN and r-universe instructions will be added once properly published.
+## CRAN instructions will be added once published.
+
+## install release from r-universe
+install.packages('socketR', repos = c('https://sassoftware.r-universe.dev', 'https://cloud.r-project.org'))
 
 ## dev version
-remotes::install_git("https://github.com/sassoftware/socketr")
-library("socketR")
+remotes::install_github("sassoftware/socketr")
 ```
 
 ## Example: TCP loopback
 
 ```r
-library(socketR)
+library("socketR")
 
 server <- socket_create("inet", "stream")
 socket_reuse_address(server, TRUE)
