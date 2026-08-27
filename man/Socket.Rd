@@ -7,11 +7,6 @@
 An R6 \code{Socket} object.
 }
 \description{
-R6 convenience wrapper for socketR handles.
-
-R6 convenience wrapper for socketR handles.
-}
-\details{
 The public methods mirror the functional API: \code{is_open()}, \code{fd()},
 \code{info()}, \code{set_blocking()}, \code{bind()}, \code{listen()}, \code{accept()}, \code{connect()},
 \code{send()}, \code{receive()}, \code{send_to()}, \code{receive_from()}, \code{shutdown()},
@@ -24,500 +19,600 @@ fallback, or \code{Socket$new_listener()} to create a listening server with
 IPv4/IPv6 fallback.
 }
 \section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{handle}}{The underlying \code{socketr_socket} external pointer.}
-}
-\if{html}{\out{</div>}}
+  \if{html}{\out{<div class="r6-fields">}}
+  \describe{
+    \item{\code{handle}}{The underlying \code{socketr_socket} external pointer.}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{address}}{Local address, when bound.}
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{address}}{Local address, when bound.}
 
-\item{\code{port}}{Local port, when bound.}
+    \item{\code{port}}{Local port, when bound.}
 
-\item{\code{peer_address}}{Connected peer address, when connected.}
+    \item{\code{peer_address}}{Connected peer address, when connected.}
 
-\item{\code{peer_port}}{Connected peer port, when connected.}
+    \item{\code{peer_port}}{Connected peer port, when connected.}
 
-\item{\code{family}}{Address family (\code{"inet"}, \code{"inet6"}, or \code{"unix"}).}
+    \item{\code{family}}{Address family (\code{"inet"}, \code{"inet6"}, or \code{"unix"}).}
 
-\item{\code{type}}{Socket type (\code{"stream"} or \code{"dgram"}).}
+    \item{\code{type}}{Socket type (\code{"stream"} or \code{"dgram"}).}
 
-\item{\code{protocol}}{Numeric socket protocol.}
+    \item{\code{protocol}}{Numeric socket protocol.}
 
-\item{\code{blocking}}{Whether the socket is in blocking mode.}
+    \item{\code{blocking}}{Whether the socket is in blocking mode.}
 
-\item{\code{open}}{Whether the underlying socket is open.}
-}
-\if{html}{\out{</div>}}
+    \item{\code{open}}{Whether the underlying socket is open.}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-Socket-new}{\code{Socket$new()}}
-\item \href{#method-Socket-is_open}{\code{Socket$is_open()}}
-\item \href{#method-Socket-fd}{\code{Socket$fd()}}
-\item \href{#method-Socket-info}{\code{Socket$info()}}
-\item \href{#method-Socket-set_blocking}{\code{Socket$set_blocking()}}
-\item \href{#method-Socket-bind}{\code{Socket$bind()}}
-\item \href{#method-Socket-listen}{\code{Socket$listen()}}
-\item \href{#method-Socket-accept}{\code{Socket$accept()}}
-\item \href{#method-Socket-connect}{\code{Socket$connect()}}
-\item \href{#method-Socket-as_connection}{\code{Socket$as_connection()}}
-\item \href{#method-Socket-write}{\code{Socket$write()}}
-\item \href{#method-Socket-read}{\code{Socket$read()}}
-\item \href{#method-Socket-send}{\code{Socket$send()}}
-\item \href{#method-Socket-receive}{\code{Socket$receive()}}
-\item \href{#method-Socket-send_to}{\code{Socket$send_to()}}
-\item \href{#method-Socket-receive_from}{\code{Socket$receive_from()}}
-\item \href{#method-Socket-shutdown}{\code{Socket$shutdown()}}
-\item \href{#method-Socket-close}{\code{Socket$close()}}
-\item \href{#method-Socket-local_name}{\code{Socket$local_name()}}
-\item \href{#method-Socket-peer_name}{\code{Socket$peer_name()}}
-\item \href{#method-Socket-poll}{\code{Socket$poll()}}
-\item \href{#method-Socket-get_option}{\code{Socket$get_option()}}
-\item \href{#method-Socket-set_options}{\code{Socket$set_options()}}
-\item \href{#method-Socket-set_option}{\code{Socket$set_option()}}
-\item \href{#method-Socket-clone}{\code{Socket$clone()}}
-}
+  \itemize{
+    \item \href{#method-Socket-initialize}{\code{Socket$new()}}
+    \item \href{#method-Socket-new_auto}{\code{Socket$new_auto()}}
+    \item \href{#method-Socket-new_listener}{\code{Socket$new_listener()}}
+    \item \href{#method-Socket-is_open}{\code{Socket$is_open()}}
+    \item \href{#method-Socket-fd}{\code{Socket$fd()}}
+    \item \href{#method-Socket-info}{\code{Socket$info()}}
+    \item \href{#method-Socket-set_blocking}{\code{Socket$set_blocking()}}
+    \item \href{#method-Socket-bind}{\code{Socket$bind()}}
+    \item \href{#method-Socket-listen}{\code{Socket$listen()}}
+    \item \href{#method-Socket-accept}{\code{Socket$accept()}}
+    \item \href{#method-Socket-connect}{\code{Socket$connect()}}
+    \item \href{#method-Socket-as_connection}{\code{Socket$as_connection()}}
+    \item \href{#method-Socket-write}{\code{Socket$write()}}
+    \item \href{#method-Socket-read}{\code{Socket$read()}}
+    \item \href{#method-Socket-send}{\code{Socket$send()}}
+    \item \href{#method-Socket-receive}{\code{Socket$receive()}}
+    \item \href{#method-Socket-send_to}{\code{Socket$send_to()}}
+    \item \href{#method-Socket-receive_from}{\code{Socket$receive_from()}}
+    \item \href{#method-Socket-shutdown}{\code{Socket$shutdown()}}
+    \item \href{#method-Socket-close}{\code{Socket$close()}}
+    \item \href{#method-Socket-local_name}{\code{Socket$local_name()}}
+    \item \href{#method-Socket-peer_name}{\code{Socket$peer_name()}}
+    \item \href{#method-Socket-poll}{\code{Socket$poll()}}
+    \item \href{#method-Socket-get_option}{\code{Socket$get_option()}}
+    \item \href{#method-Socket-set_options}{\code{Socket$set_options()}}
+    \item \href{#method-Socket-set_option}{\code{Socket$set_option()}}
+    \item \href{#method-Socket-clone}{\code{Socket$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Socket-new"></a>}}
-\if{latex}{\out{\hypertarget{method-Socket-new}{}}}
-\subsection{Method \code{new()}}{
-Create a socket wrapper or wrap an existing handle.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$new(
+\if{html}{\out{<a id="method-Socket-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-Socket-initialize}{}}}
+\subsection{\code{Socket$new()}}{
+  Create a socket wrapper or wrap an existing handle.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$new(
   domain = c("inet", "inet6", "unix"),
   type = c("stream", "dgram"),
   protocol = 0L,
   nonblocking = FALSE,
   cloexec = TRUE,
   handle = NULL
-)}\if{html}{\out{</div>}}
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{domain}}{Address family passed to \code{\link[=socket_create]{socket_create()}}.}
+      \item{\code{type}}{Socket type passed to \code{\link[=socket_create]{socket_create()}}.}
+      \item{\code{protocol}}{Numeric protocol passed to \code{\link[=socket_create]{socket_create()}}.}
+      \item{\code{nonblocking}}{Whether the new socket is nonblocking.}
+      \item{\code{cloexec}}{Whether the new socket is close-on-exec.}
+      \item{\code{handle}}{An existing socketR handle to wrap.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{domain}}{Address family passed to \code{\link[=socket_create]{socket_create()}}.}
-
-\item{\code{type}}{Socket type passed to \code{\link[=socket_create]{socket_create()}}.}
-
-\item{\code{protocol}}{Numeric protocol passed to \code{\link[=socket_create]{socket_create()}}.}
-
-\item{\code{nonblocking}}{Whether the new socket is nonblocking.}
-
-\item{\code{cloexec}}{Whether the new socket is close-on-exec.}
-
-\item{\code{handle}}{An existing socketR handle to wrap.}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Socket-new_auto"></a>}}
+\if{latex}{\out{\hypertarget{method-Socket-new_auto}{}}}
+\subsection{\code{Socket$new_auto()}}{
+  Create a connected client using IPv4/IPv6 endpoint fallback.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$new_auto(
+  address,
+  port = NULL,
+  type = c("stream", "dgram"),
+  protocol = 0L,
+  nonblocking = FALSE,
+  cloexec = TRUE,
+  prefer = c("inet6", "inet")
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{address}}{Hostname, IP address, or endpoint such as \code{"[::1]:8080"}.}
+      \item{\code{port}}{Optional port when it is not embedded in \code{address}.}
+      \item{\code{type}}{Socket type, \code{"stream"} (TCP) or \code{"dgram"} (UDP).}
+      \item{\code{protocol}}{Numeric protocol, usually zero.}
+      \item{\code{nonblocking}}{Whether the socket should be nonblocking.}
+      \item{\code{cloexec}}{Whether to set close-on-exec.}
+      \item{\code{prefer}}{Address families to try, in order.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A connected \link{Socket} R6 object.
+  }
 }
-\if{html}{\out{</div>}}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Socket-new_listener"></a>}}
+\if{latex}{\out{\hypertarget{method-Socket-new_listener}{}}}
+\subsection{\code{Socket$new_listener()}}{
+  Create a listener using IPv4/IPv6 endpoint fallback.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$new_listener(
+  address = NULL,
+  port = NULL,
+  backlog = 128L,
+  reuse_address = TRUE,
+  cloexec = TRUE,
+  prefer = c("inet6", "inet")
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{address}}{Local hostname, IP address, endpoint, or \code{NULL} for wildcard.}
+      \item{\code{port}}{Optional port when it is not embedded in \code{address}.}
+      \item{\code{backlog}}{Maximum pending connection queue length.}
+      \item{\code{reuse_address}}{Whether to set \code{SO_REUSEADDR}.}
+      \item{\code{cloexec}}{Whether to set close-on-exec.}
+      \item{\code{prefer}}{Address families to try, in order.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A listening \link{Socket} R6 object.
+  }
 }
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-is_open"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-is_open}{}}}
-\subsection{Method \code{is_open()}}{
-Test whether the wrapped socket is open.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$is_open()}\if{html}{\out{</div>}}
+\subsection{\code{Socket$is_open()}}{
+  Test whether the wrapped socket is open.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$is_open()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-fd"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-fd}{}}}
-\subsection{Method \code{fd()}}{
-Return the wrapped socket file descriptor.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$fd()}\if{html}{\out{</div>}}
+\subsection{\code{Socket$fd()}}{
+  Return the wrapped socket file descriptor.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$fd()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-info"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-info}{}}}
-\subsection{Method \code{info()}}{
-Return metadata for the wrapped socket.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$info()}\if{html}{\out{</div>}}
+\subsection{\code{Socket$info()}}{
+  Return metadata for the wrapped socket.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$info()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-set_blocking"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-set_blocking}{}}}
-\subsection{Method \code{set_blocking()}}{
-Set blocking mode.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$set_blocking(blocking = TRUE)}\if{html}{\out{</div>}}
+\subsection{\code{Socket$set_blocking()}}{
+  Set blocking mode.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$set_blocking(blocking = TRUE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{blocking}}{Whether operations should block.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{blocking}}{Whether operations should block.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-bind"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-bind}{}}}
-\subsection{Method \code{bind()}}{
-Bind the wrapped socket.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$bind(address = NULL, port = NULL)}\if{html}{\out{</div>}}
+\subsection{\code{Socket$bind()}}{
+  Bind the wrapped socket.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$bind(address = NULL, port = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{address}}{Local hostname, IP address, or Unix path.}
+      \item{\code{port}}{Local port, or \code{NULL} for Unix sockets.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{address}}{Local hostname, IP address, or Unix path.}
-
-\item{\code{port}}{Local port, or \code{NULL} for Unix sockets.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-listen"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-listen}{}}}
-\subsection{Method \code{listen()}}{
-Listen for stream connections.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$listen(backlog = 128L)}\if{html}{\out{</div>}}
+\subsection{\code{Socket$listen()}}{
+  Listen for stream connections.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$listen(backlog = 128L)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{backlog}}{Maximum pending connection queue length.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{backlog}}{Maximum pending connection queue length.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-accept"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-accept}{}}}
-\subsection{Method \code{accept()}}{
-Accept a pending connection.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$accept(nonblocking = NULL)}\if{html}{\out{</div>}}
+\subsection{\code{Socket$accept()}}{
+  Accept a pending connection.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$accept(nonblocking = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{nonblocking}}{Whether the accepted socket should be nonblocking.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{nonblocking}}{Whether the accepted socket should be nonblocking.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-connect"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-connect}{}}}
-\subsection{Method \code{connect()}}{
-Connect the wrapped socket.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$connect(address, port = NULL)}\if{html}{\out{</div>}}
+\subsection{\code{Socket$connect()}}{
+  Connect the wrapped socket.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$connect(address, port = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{address}}{Remote hostname, IP address, or Unix path.}
+      \item{\code{port}}{Remote port, or \code{NULL} for Unix sockets.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{address}}{Remote hostname, IP address, or Unix path.}
-
-\item{\code{port}}{Remote port, or \code{NULL} for Unix sockets.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-as_connection"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-as_connection}{}}}
-\subsection{Method \code{as_connection()}}{
-Return the wrapped socket as an R connection.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$as_connection()}\if{html}{\out{</div>}}
+\subsection{\code{Socket$as_connection()}}{
+  Return the wrapped socket as an R connection.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$as_connection()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-write"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-write}{}}}
-\subsection{Method \code{write()}}{
-Write bytes to the wrapped socket.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$write(object, flags = 0L)}\if{html}{\out{</div>}}
+\subsection{\code{Socket$write()}}{
+  Write bytes to the wrapped socket.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$write(object, flags = 0L)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{object}}{Raw bytes or a character scalar.}
+      \item{\code{flags}}{Native \code{send()} flags.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{object}}{Raw bytes or a character scalar.}
-
-\item{\code{flags}}{Native \code{send()} flags.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-read"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-read}{}}}
-\subsection{Method \code{read()}}{
-Read bytes from the wrapped socket.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$read(n = 4096L, flags = 0L)}\if{html}{\out{</div>}}
+\subsection{\code{Socket$read()}}{
+  Read bytes from the wrapped socket.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$read(n = 4096L, flags = 0L)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{n}}{Maximum number of bytes.}
+      \item{\code{flags}}{Native \code{recv()} flags.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{n}}{Maximum number of bytes.}
-
-\item{\code{flags}}{Native \code{recv()} flags.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-send"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-send}{}}}
-\subsection{Method \code{send()}}{
-Send bytes on the wrapped socket.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$send(data, flags = 0L)}\if{html}{\out{</div>}}
+\subsection{\code{Socket$send()}}{
+  Send bytes on the wrapped socket.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$send(data, flags = 0L)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{data}}{Raw bytes or a character scalar.}
+      \item{\code{flags}}{Native \code{send()} flags.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{data}}{Raw bytes or a character scalar.}
-
-\item{\code{flags}}{Native \code{send()} flags.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-receive"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-receive}{}}}
-\subsection{Method \code{receive()}}{
-Receive bytes from the wrapped socket.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$receive(n = 4096L, flags = 0L)}\if{html}{\out{</div>}}
+\subsection{\code{Socket$receive()}}{
+  Receive bytes from the wrapped socket.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$receive(n = 4096L, flags = 0L)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{n}}{Maximum number of bytes.}
+      \item{\code{flags}}{Native \code{recv()} flags.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{n}}{Maximum number of bytes.}
-
-\item{\code{flags}}{Native \code{recv()} flags.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-send_to"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-send_to}{}}}
-\subsection{Method \code{send_to()}}{
-Send a datagram.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$send_to(data, address, port = NULL, flags = 0L)}\if{html}{\out{</div>}}
+\subsection{\code{Socket$send_to()}}{
+  Send a datagram.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$send_to(data, address, port = NULL, flags = 0L)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{data}}{Raw bytes or a character scalar.}
+      \item{\code{address}}{Destination hostname or IP address.}
+      \item{\code{port}}{Destination port.}
+      \item{\code{flags}}{Native \code{sendto()} flags.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{data}}{Raw bytes or a character scalar.}
-
-\item{\code{address}}{Destination hostname or IP address.}
-
-\item{\code{port}}{Destination port.}
-
-\item{\code{flags}}{Native \code{sendto()} flags.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-receive_from"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-receive_from}{}}}
-\subsection{Method \code{receive_from()}}{
-Receive a datagram.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$receive_from(n = 4096L, flags = 0L)}\if{html}{\out{</div>}}
+\subsection{\code{Socket$receive_from()}}{
+  Receive a datagram.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$receive_from(n = 4096L, flags = 0L)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{n}}{Maximum datagram payload size.}
+      \item{\code{flags}}{Native \code{recvfrom()} flags.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{n}}{Maximum datagram payload size.}
-
-\item{\code{flags}}{Native \code{recvfrom()} flags.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-shutdown"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-shutdown}{}}}
-\subsection{Method \code{shutdown()}}{
-Shut down part of the connection.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$shutdown(how = c("both", "read", "write"))}\if{html}{\out{</div>}}
+\subsection{\code{Socket$shutdown()}}{
+  Shut down part of the connection.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$shutdown(how = c("both", "read", "write"))}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{how}}{One of \code{"read"}, \code{"write"}, or \code{"both"}.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{how}}{One of \code{"read"}, \code{"write"}, or \code{"both"}.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-close"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-close}{}}}
-\subsection{Method \code{close()}}{
-Close the wrapped socket.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$close()}\if{html}{\out{</div>}}
+\subsection{\code{Socket$close()}}{
+  Close the wrapped socket.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$close()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-local_name"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-local_name}{}}}
-\subsection{Method \code{local_name()}}{
-Return the local socket name.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$local_name()}\if{html}{\out{</div>}}
+\subsection{\code{Socket$local_name()}}{
+  Return the local socket name.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$local_name()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-peer_name"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-peer_name}{}}}
-\subsection{Method \code{peer_name()}}{
-Return the peer socket name.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$peer_name()}\if{html}{\out{</div>}}
+\subsection{\code{Socket$peer_name()}}{
+  Return the peer socket name.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$peer_name()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-poll"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-poll}{}}}
-\subsection{Method \code{poll()}}{
-Poll the wrapped socket.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$poll(events = "read", timeout_ms = 60000L)}\if{html}{\out{</div>}}
+\subsection{\code{Socket$poll()}}{
+  Poll the wrapped socket.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$poll(events = "read", timeout_ms = 60000L)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{events}}{Requested readiness events.}
+      \item{\code{timeout_ms}}{Timeout in milliseconds.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{events}}{Requested readiness events.}
-
-\item{\code{timeout_ms}}{Timeout in milliseconds.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-get_option"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-get_option}{}}}
-\subsection{Method \code{get_option()}}{
-Get a socket option.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$get_option(
+\subsection{\code{Socket$get_option()}}{
+  Get a socket option.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$get_option(
   level = "socket",
   option,
   type = c("int", "logical", "timeval", "linger", "raw"),
   size = 256L
-)}\if{html}{\out{</div>}}
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{level}}{Option level.}
+      \item{\code{option}}{Option name or numeric constant.}
+      \item{\code{type}}{Return type.}
+      \item{\code{size}}{Maximum raw option size.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{level}}{Option level.}
-
-\item{\code{option}}{Option name or numeric constant.}
-
-\item{\code{type}}{Return type.}
-
-\item{\code{size}}{Maximum raw option size.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-set_options"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-set_options}{}}}
-\subsection{Method \code{set_options()}}{
-Set multiple socket options.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$set_options(options)}\if{html}{\out{</div>}}
+\subsection{\code{Socket$set_options()}}{
+  Set multiple socket options.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$set_options(options)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{options}}{Option specifications.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{options}}{Option specifications.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-set_option"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-set_option}{}}}
-\subsection{Method \code{set_option()}}{
-Set a socket option.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$set_option(
+\subsection{\code{Socket$set_option()}}{
+  Set a socket option.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$set_option(
   level = "socket",
   option,
   value,
   type = c("int", "logical", "timeval", "linger", "raw")
-)}\if{html}{\out{</div>}}
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{level}}{Option level.}
+      \item{\code{option}}{Option name or numeric constant.}
+      \item{\code{value}}{Option value.}
+      \item{\code{type}}{Value type.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{level}}{Option level.}
-
-\item{\code{option}}{Option name or numeric constant.}
-
-\item{\code{value}}{Option value.}
-
-\item{\code{type}}{Value type.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Socket-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-Socket-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Socket$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{Socket$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Socket$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

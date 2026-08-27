@@ -85,6 +85,6 @@ for details on how to submit contributions to this project.
 
 ## License
 
-This project is licensed under the [Apache 2.0 License](LICENSE).
+This project is licensed under the Apache 2.0 License.
 
-Direct and indirect dependencies are governed by their own licenses. See [DEP-LICENSES.md](DEP-LICENSES.md) file for details.
+Direct and indirect dependencies are governed by their own licenses. See `DEP-LICENSES.md` file for details.

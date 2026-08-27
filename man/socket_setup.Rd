@@ -61,9 +61,7 @@ Create a POSIX socket.
 }
 \examples{
 \dontshow{if (.Platform$OS.type != "windows") withAutoprint(\{ # examplesIf}
-if (.Platform$OS.type != "windows") {
-  s <- socket_create()
-  socket_close(s)
-}
+s <- socket_create()
+socket_close(s)
 \dontshow{\}) # examplesIf}
 }

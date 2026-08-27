@@ -6,6 +6,7 @@
 ^ContributorAgreement\.txt$
 ^SUPPORT\.md$
 ^SECURITY\.md$
+^LICENSE$
 ^doc$
 ^Meta$
 ^src/.*\.(o|so|dll|dylib|a|lib)$

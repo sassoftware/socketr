@@ -53,6 +53,39 @@ Socket <- R6::R6Class(
       }
     },
 
+    #' @description Create a connected client using IPv4/IPv6 endpoint fallback.
+    #' @param address Hostname, IP address, or endpoint such as `"[::1]:8080"`.
+    #' @param port Optional port when it is not embedded in `address`.
+    #' @param type Socket type, `"stream"` (TCP) or `"dgram"` (UDP).
+    #' @param protocol Numeric protocol, usually zero.
+    #' @param nonblocking Whether the socket should be nonblocking.
+    #' @param cloexec Whether to set close-on-exec.
+    #' @param prefer Address families to try, in order.
+    #' @return A connected [Socket] R6 object.
+    new_auto = function(address, port = NULL, type = c("stream", "dgram"),
+                        protocol = 0L, nonblocking = FALSE,
+                        cloexec = TRUE, prefer = c("inet6", "inet")) {
+      Socket$new(handle = socket_connect_auto(
+        address, port, type, protocol, nonblocking, cloexec, prefer
+      ))
+    },
+
+    #' @description Create a listener using IPv4/IPv6 endpoint fallback.
+    #' @param address Local hostname, IP address, endpoint, or `NULL` for wildcard.
+    #' @param port Optional port when it is not embedded in `address`.
+    #' @param backlog Maximum pending connection queue length.
+    #' @param reuse_address Whether to set `SO_REUSEADDR`.
+    #' @param cloexec Whether to set close-on-exec.
+    #' @param prefer Address families to try, in order.
+    #' @return A listening [Socket] R6 object.
+    new_listener = function(address = NULL, port = NULL, backlog = 128L,
+                            reuse_address = TRUE, cloexec = TRUE,
+                            prefer = c("inet6", "inet")) {
+      Socket$new(handle = socket_listen_auto(
+        address, port, backlog, reuse_address, cloexec, prefer
+      ))
+    },
+
     #' @description Test whether the wrapped socket is open.
     is_open = function() socket_is_open(self$handle),
     #' @description Return the wrapped socket file descriptor.
@@ -219,6 +252,11 @@ Socket <- R6::R6Class(
   )
 )
 
+# Keep the constructors available as class methods while defining their
+# implementations with the other R6 methods above.
+Socket$new_auto <- Socket$public_methods$new_auto
+Socket$new_listener <- Socket$public_methods$new_listener
+
 #' Close an R6 Socket with the standard R connection API.
 #'
 #' @param con A `Socket` R6 object.
@@ -226,43 +264,4 @@ Socket <- R6::R6Class(
 #' @export
 close.Socket <- function(con, ...) {
   con$close()
-}
-
-#' Create an R6 client using IPv4/IPv6 endpoint fallback.
-#'
-#' @param address Hostname, IP address, or endpoint such as `"[::1]:8080"`.
-#' @param port Optional port when it is not embedded in `address`.
-#' @param type Socket type, `"stream"` (TCP) or `"dgram"` (UDP).
-#' @param protocol Numeric protocol, usually zero.
-#' @param nonblocking Whether the socket should be nonblocking.
-#' @param cloexec Whether to set close-on-exec.
-#' @param prefer Address families to try, in order.
-#' @return A connected [Socket] R6 object.
-#' @name Socket-new_auto
-#' @rdname Socket-new_auto
-Socket$new_auto <- function(address, port = NULL, type = c("stream", "dgram"),
-                            protocol = 0L, nonblocking = FALSE,
-                            cloexec = TRUE, prefer = c("inet6", "inet")) {
-  Socket$new(handle = socket_connect_auto(
-    address, port, type, protocol, nonblocking, cloexec, prefer
-  ))
-}
-
-#' Create an R6 listener using IPv4/IPv6 endpoint fallback.
-#'
-#' @param address Local hostname, IP address, endpoint, or `NULL` for wildcard.
-#' @param port Optional port when it is not embedded in `address`.
-#' @param backlog Maximum pending connection queue length.
-#' @param reuse_address Whether to set `SO_REUSEADDR`.
-#' @param cloexec Whether to set close-on-exec.
-#' @param prefer Address families to try, in order.
-#' @return A listening [Socket] R6 object.
-#' @name Socket-new_listener
-#' @rdname Socket-new_listener
-Socket$new_listener <- function(address = NULL, port = NULL, backlog = 128L,
-                                 reuse_address = TRUE, cloexec = TRUE,
-                                 prefer = c("inet6", "inet")) {
-  Socket$new(handle = socket_listen_auto(
-    address, port, backlog, reuse_address, cloexec, prefer
-  ))
 }

@@ -4,5 +4,6 @@
 #include <R_ext/Rdynload.h>
 
 extern "C" void R_init_socketR(DllInfo* dll) {
+  R_registerRoutines(dll, nullptr, nullptr, nullptr, nullptr);
   R_useDynamicSymbols(dll, FALSE);
 }

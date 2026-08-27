@@ -15,8 +15,20 @@ Socket handles are RAII-managed external pointers and should still be
 closed explicitly with \code{\link[=socket_close]{socket_close()}} when possible. Most system-call
 failures include the POSIX errno name and number.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://sassoftware.github.io/socketr/}
+}
+
+}
 \author{
 \strong{Maintainer}: Eduardo Hellas \email{ehellas@gmail.com}
+
+Authors:
+\itemize{
+  \item Eduardo Hellas \email{ehellas@gmail.com}
+}
 
 Other contributors:
 \itemize{

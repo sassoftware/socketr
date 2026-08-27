@@ -1,17 +1,15 @@
 Package: socketR
 Title: POSIX Socket Programming for R
-Version: 1.0.2
+Version: 1.0.3
 Authors@R: c(
     person("Eduardo", "Hellas", , "ehellas@gmail.com", role = c("aut", "cre")),
     person("SAS", email= "support@sas.com", role = c("cph", "fnd"))
     )
-Author: Eduardo Hellas [aut, cre]
 Maintainer: Eduardo Hellas <ehellas@gmail.com>
 Description: Provides a small, type-safe interface to POSIX sockets on Linux.
-License: file LICENSE
+License: Apache License (>= 2)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
 SystemRequirements: Linux operating system with POSIX socket APIs and C++17 compiler
 Imports:
     R6
@@ -23,3 +21,4 @@ Suggests:
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 URL: https://sassoftware.github.io/socketr/
+Config/roxygen2/version: 8.1.0

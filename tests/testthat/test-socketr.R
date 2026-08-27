@@ -168,6 +168,14 @@ test_that("automatic listener selects an available address family", {
 })
 
 test_that("automatic helpers accept bracketed IPv6 endpoints", {
+  ipv6_available <- tryCatch({
+    probe <- socket_create("inet6", "stream")
+    socket_bind(probe, "::1", 0L)
+    socket_close(probe)
+    TRUE
+  }, error = function(e) FALSE)
+  skip_if_not(ipv6_available, "IPv6 loopback is unavailable")
+
   listener <- socket_listen_auto("[::1]", port = 0L, prefer = "inet6")
   on.exit(socket_close(listener), add = TRUE)
   endpoint <- sprintf("[::1]:%d", listener$port)
