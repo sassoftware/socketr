@@ -80,7 +80,7 @@ s$close()
 
 We welcome contributions! 
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) 
+Please read `CONTRIBUTING.md`
 for details on how to submit contributions to this project.
 
 ## License
