@@ -1,5 +1,6 @@
 # socketR
 <!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/socketR)](https://CRAN.R-project.org/package=socketR)
 [![r-universe status](https://sassoftware.r-universe.dev/badges/:name)](https://sassoftware.r-universe.dev)
 [![r-universe status](https://sassoftware.r-universe.dev/badges/:packages)](https://sassoftware.r-universe.dev)
 [![r-universe status](https://sassoftware.r-universe.dev/socketr/badges/version)](https://sassoftware.r-universe.dev)
@@ -13,7 +14,8 @@ function-based and object-oriented APIs.
 Web documentation: https://sassoftware.github.io/socketr/
 
 ```r
-## CRAN instructions will be added once published.
+## CRAN
+install.packages('socketR')
 
 ## install release from r-universe
 install.packages('socketR', repos = c('https://sassoftware.r-universe.dev', 'https://cloud.r-project.org'))
