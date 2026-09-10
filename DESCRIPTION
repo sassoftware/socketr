@@ -5,7 +5,8 @@ Authors@R: c(
     person("Eduardo", "Hellas", , "ehellas@gmail.com", role = c("aut", "cre")),
     person("SAS", email= "support@sas.com", role = c("cph", "fnd"))
     )
-Description: Provides a small, type-safe interface to POSIX sockets on Linux.
+Description: Provides a small POSIX sockets interface to R, enabling direct network communication from R for applications that need low-level socket control or lightweight client and server connections. 
+This package provides IPv4 and IPv6 support with 'TCP/UDP' protocols. It functional API with 'socket_create' and an R6 interface through 'Socket' object.
 License: Apache License (>= 2)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
