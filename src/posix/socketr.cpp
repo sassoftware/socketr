@@ -4,25 +4,7 @@
 #include <R.h>
 #include <Rinternals.h>
 #include <R_ext/Rdynload.h>
-
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wkeyword-macro"
-#endif
-
-#define class class_
-#define private private_
-#include <R_ext/Connections.h>
-#undef private
-#undef class
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif
-
-#if !defined(R_CONNECTIONS_VERSION) || R_CONNECTIONS_VERSION != 1
-#error "socketR requires R_CONNECTIONS_VERSION == 1"
-#endif
+#include "rconnections.h"
 
 #include <arpa/inet.h>
 #include <cerrno>
@@ -238,8 +220,10 @@ SocketHandle* get_handle(SEXP xp, bool require_open = true) {
 }
 
 SocketHandle* connection_handle(Rconnection con) {
-  if (con == nullptr || con->ex_ptr == nullptr) return nullptr;
-  ConnectionState* state = static_cast<ConnectionState*>(con->ex_ptr);
+  if (con == nullptr) return nullptr;
+  void* ex_ptr = socketr_connection_get_ex_ptr(con);
+  if (ex_ptr == nullptr) return nullptr;
+  ConnectionState* state = static_cast<ConnectionState*>(ex_ptr);
   if (TYPEOF(state->socket) != EXTPTRSXP) return nullptr;
   SocketHandle* handle =
       static_cast<SocketHandle*>(R_ExternalPtrAddr(state->socket));
@@ -248,12 +232,13 @@ SocketHandle* connection_handle(Rconnection con) {
 
 Rboolean socket_connection_open(Rconnection con) {
   if (connection_handle(con) == nullptr) return FALSE;
-  con->isopen = TRUE;
+  socketr_connection_set_isopen(con, TRUE);
   return TRUE;
 }
 
 void socket_connection_close(Rconnection con) {
-  ConnectionState* state = static_cast<ConnectionState*>(con->ex_ptr);
+  ConnectionState* state = static_cast<ConnectionState*>(
+      socketr_connection_get_ex_ptr(con));
   if (state != nullptr && state->close_socket) {
     SocketHandle* handle = TYPEOF(state->socket) == EXTPTRSXP
                                ? static_cast<SocketHandle*>(
@@ -263,19 +248,20 @@ void socket_connection_close(Rconnection con) {
       ::close(handle->fd);
       handle->fd = -1;
     }
-    con->isopen = FALSE;
+    socketr_connection_set_isopen(con, FALSE);
   } else {
     // Preserve the default adapter-only close behavior.
-    con->isopen = TRUE;
+    socketr_connection_set_isopen(con, TRUE);
   }
 }
 
 void socket_connection_destroy(Rconnection con) {
-  if (con->ex_ptr != nullptr) {
-    ConnectionState* state = static_cast<ConnectionState*>(con->ex_ptr);
+  void* ex_ptr = socketr_connection_get_ex_ptr(con);
+  if (ex_ptr != nullptr) {
+    ConnectionState* state = static_cast<ConnectionState*>(ex_ptr);
     R_ReleaseObject(state->socket);
     delete state;
-    con->ex_ptr = nullptr;
+    socketr_connection_set_ex_ptr(con, nullptr);
   }
 }
 
@@ -311,7 +297,7 @@ size_t socket_connection_read(void* buffer, size_t size, size_t nitems,
     break;
   }
   if (offset == 0) return 0;
-  con->isopen = TRUE;
+  socketr_connection_set_isopen(con, TRUE);
   return offset / size;
 }
 
@@ -335,13 +321,13 @@ size_t socket_connection_write(const void* buffer, size_t size, size_t nitems,
     break;
   }
   if (offset == 0) return 0;
-  con->isopen = TRUE;
+  socketr_connection_set_isopen(con, TRUE);
   return offset / size;
 }
 
 int socket_connection_fflush(Rconnection con) {
   // Keep the adapter open after libraries flush their output sink.
-  con->isopen = TRUE;
+  socketr_connection_set_isopen(con, TRUE);
   return 0;
 }
 
@@ -646,25 +632,17 @@ CALL_BEGIN
   if (handle->fd < 0) stopf("socket is closed");
 
   Rconnection connection = nullptr;
-  SEXP result = PROTECT(R_new_custom_connection(
+  SEXP result = PROTECT(socketr_new_custom_connection(
       "socketR socket", "r+b", "socketr_connection", &connection));
-  connection->open = socket_connection_open;
-  connection->close = socket_connection_close;
-  connection->destroy = socket_connection_destroy;
-  connection->fgetc = socket_connection_fgetc;
-  connection->fgetc_internal = socket_connection_fgetc;
-  connection->read = socket_connection_read;
-  connection->write = socket_connection_write;
-  connection->fflush = socket_connection_fflush;
-  connection->seek = socket_connection_seek;
-  connection->canread = TRUE;
-  connection->canwrite = TRUE;
-  connection->canseek = FALSE;
-  connection->text = FALSE;
-  connection->blocking = fd_is_blocking(handle->fd) ? TRUE : FALSE;
-  connection->isopen = TRUE;
+  socketr_connection_set_callbacks(
+      connection, socket_connection_open, socket_connection_close,
+      socket_connection_destroy, socket_connection_fgetc,
+      socket_connection_fgetc, socket_connection_read, socket_connection_write,
+      socket_connection_fflush, socket_connection_seek);
+  socketr_connection_set_flags(connection, TRUE, TRUE, FALSE, FALSE,
+                               fd_is_blocking(handle->fd) ? TRUE : FALSE, TRUE);
   ConnectionState* state = new ConnectionState{socket_s, close_socket};
-  connection->ex_ptr = static_cast<void*>(state);
+  socketr_connection_set_ex_ptr(connection, static_cast<void*>(state));
   R_PreserveObject(socket_s);
   UNPROTECT(1);
   return result;
