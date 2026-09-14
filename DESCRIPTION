@@ -1,6 +1,6 @@
 Package: socketR
 Title: POSIX Socket Programming for R
-Version: 1.0.4
+Version: 1.0.5
 Authors@R: c(
     person("Eduardo", "Hellas", , "ehellas@gmail.com", role = c("aut", "cre")),
     person("SAS", email= "support@sas.com", role = c("cph", "fnd"))
@@ -22,3 +22,5 @@ VignetteBuilder: knitr
 URL: https://sassoftware.github.io/socketr/
 BugReports: https://github.com/sassoftware/socketr/issues
 Config/roxygen2/version: 8.1.0
+Depends: 
+    R (>= 4.6.0)

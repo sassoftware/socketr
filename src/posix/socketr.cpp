@@ -4,11 +4,21 @@
 #include <R.h>
 #include <Rinternals.h>
 #include <R_ext/Rdynload.h>
+
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wkeyword-macro"
+#endif
+
 #define class class_
 #define private private_
 #include <R_ext/Connections.h>
 #undef private
 #undef class
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif
 
 #if !defined(R_CONNECTIONS_VERSION) || R_CONNECTIONS_VERSION != 1
 #error "socketR requires R_CONNECTIONS_VERSION == 1"
